@@ -1,7 +1,7 @@
 SEPageViewWithNavigationBar
 ===========================
 
-SEPageViewWithNavigationBar is a subclass of UIViewController which contains UIPageViewController and changes navigation bar title during the swipe pages, like in Twitter app.
+SEPageViewWithNavigationBar is a subclass of UIViewController which contains UIPageViewController and changes navigation bar title during the swipe pages, like in Twitter app. Written in **Swift**, requires **iOS 7** or later.
 
 ![gif](https://github.com/ifau/SEPageViewWithNavigationBar/blob/master/Readme/1.gif?raw=true)
 
@@ -113,6 +113,18 @@ pagedViewController.setCustomTitle(cellClass: MyCustomCell.self) { (titleCell: U
 Result:
 
 ![custom title](https://github.com/ifau/SEPageViewWithNavigationBar/blob/master/Readme/2.png?raw=true)
+
+#Installation
+
+##Manual
+
+Simply drag `SEPageViewWithNavigationBar.swift` to your project.
+
+##Cocoapods
+
+Add following line to your `Podfile`:
+
+	pod "SEPageViewWithNavigationBar"
 
 #License
 
