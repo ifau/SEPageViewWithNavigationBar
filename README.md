@@ -11,9 +11,9 @@ Just create instance of SEPageViewWithNavigationBar and set view controllers to 
 
 ```swift
 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-let vc1 = storyboard.instantiateViewControllerWithIdentifier("vc1") as! UIViewController
-let vc2 = storyboard.instantiateViewControllerWithIdentifier("vc2") as! UIViewController
-let vc3 = storyboard.instantiateViewControllerWithIdentifier("vc3") as! UIViewController
+let vc1 = storyboard.instantiateViewControllerWithIdentifier("vc1")
+let vc2 = storyboard.instantiateViewControllerWithIdentifier("vc2")
+let vc3 = storyboard.instantiateViewControllerWithIdentifier("vc3")
 
 let pagedViewController = SEPageViewWithNavigationBar()
 pagedViewController.viewControllers = [vc1, vc2, vc3]
@@ -66,15 +66,15 @@ class MyCustomCell: UICollectionViewCell
         self.contentView.addSubview(textLabel)
         
         imageView = UIImageView()
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(imageView)
         
         let space1 = UIView()
-        space1.setTranslatesAutoresizingMaskIntoConstraints(false)
+        space1.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(space1)
         
         let space2 = UIView()
-        space2.setTranslatesAutoresizingMaskIntoConstraints(false)
+        space2.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(space2)
         
         let views = ["textLabel" : textLabel, "imageView" : imageView, "space1" : space1, "space2" : space2]

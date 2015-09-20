@@ -121,7 +121,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?
     {
-        if let index = find(viewControllers, viewController)
+        if let index = viewControllers.indexOf(viewController)
         {
             return index + 1 == viewControllers.count ? nil : viewControllers[(index + 1)]
         }
@@ -131,7 +131,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
     {
-        if let index = find(viewControllers, viewController)
+        if let index = viewControllers.indexOf(viewController)
         {
             return index - 1 < 0 ? nil : viewControllers[(index - 1)]
         }
@@ -139,11 +139,11 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
         return nil
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool)
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
     {
-        let currentViewController = pageViewController.viewControllers.last as! UIViewController
+        let currentViewController = pageViewController.viewControllers!.last!
         
-        if let currentIndex = find(viewControllers, currentViewController)
+        if let currentIndex = viewControllers.indexOf(currentViewController)
         {
             currentPage = currentIndex
             titleView.pageControl.currentPage = currentIndex
@@ -170,7 +170,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     {
         if customTitleCell != nil
         {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("customHeaderCell", forIndexPath: indexPath) as! UICollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("customHeaderCell", forIndexPath: indexPath) 
             return customTitleCell!(titleCell: cell, pageIndex: indexPath.row)
         }
         else
@@ -203,7 +203,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     
     // MARK: - Other
     
-    func setCustomTitle(#cellClass: AnyClass, delegateCallback: ((titleCell: UICollectionViewCell, currentPage: Int) -> (UICollectionViewCell)))
+    func setCustomTitle(cellClass cellClass: AnyClass, delegateCallback: ((titleCell: UICollectionViewCell, currentPage: Int) -> (UICollectionViewCell)))
     {
         customTitleCellClass = cellClass
         customTitleCell = delegateCallback
@@ -233,7 +233,7 @@ private class SENavigationBarView: UIView
         initialization()
     }
 
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
         initialization()
@@ -241,20 +241,20 @@ private class SENavigationBarView: UIView
     
     private func initialization()
     {
-        var layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
         
         collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-        collectionView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.registerClass(SENavigationBarTitleCell.self, forCellWithReuseIdentifier: "headerCell")
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.scrollEnabled = false
         self.addSubview(collectionView)
         
         pageControl = UIPageControl()
-        pageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(pageControl)
         
         let views = ["collectionView" : collectionView, "pageControl": pageControl]
@@ -293,7 +293,7 @@ private class SENavigationBarTitleCell: UICollectionViewCell
         super.init(frame: frame)
         
         label = UILabel()
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .Center
         self.contentView.addSubview(label)
         
@@ -306,7 +306,7 @@ private class SENavigationBarTitleCell: UICollectionViewCell
         self.init(frame:CGRectZero)
     }
     
-    required init(coder aDecoder: NSCoder)
+    required init?(coder aDecoder: NSCoder)
     {
         fatalError("This class does not support NSCoding")
     }
