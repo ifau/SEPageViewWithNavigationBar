@@ -7,6 +7,8 @@ SEPageViewWithNavigationBar is a subclass of UIViewController which contains UIP
 
 #Usage
 
+##From code
+
 Just create instance of SEPageViewWithNavigationBar and set view controllers to `viewControllers` property. Note that ***SEPageViewWithNavigationBar should be embedded in UINavigationController***.
 
 ```swift
@@ -20,6 +22,20 @@ pagedViewController.viewControllers = [vc1, vc2, vc3]
     
 self.window?.rootViewController = UINavigationController(rootViewController: pagedViewController)
 ```
+
+##Using storyboard
+
+1) Drag a UIViewController into storyboard.
+
+2) Place it in the hierarchy that contains UINavigationController.
+
+3) Set custom class to `SEPageViewWithNavigationBar` in Identity Inspector.
+
+4) Add custom segues in chain between this UIViewController and those that should be pages.
+
+5) Set custom class to `SEPageViewSegue` and identity to `SEPage` in Attributes Inspector for each segue.
+
+![storyboard setup](https://github.com/ifau/SEPageViewWithNavigationBar/blob/master/Readme/3.png?raw=true)
 
 #Configuration
 
@@ -45,7 +61,7 @@ SEPageViewWithNavigationBar allows you to change the following properties:
 
 By default navigation bar title displays current view controller title. Actually, navigation bar title view in SEPageViewWithNavigationBar is UICollectionView, so you can define your own UICollectionViewCell and customize it as you need, using following function:
 
-`setCustomTitle(#cellClass: AnyClass, delegateCallback: ((titleCell: UICollectionViewCell, currentPage: Int) -> (UICollectionViewCell)))`
+`setCustomTitle(cellClass cellClass: AnyClass, delegateCallback: ((titleCell: UICollectionViewCell, currentPage: Int) -> (UICollectionViewCell)))`
 
 For example, if you need image near title label:
 
@@ -60,7 +76,7 @@ class MyCustomCell: UICollectionViewCell
         super.init(frame: frame)
         
         textLabel = UILabel()
-        textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20)
         textLabel.textColor = UIColor.whiteColor()
         self.contentView.addSubview(textLabel)
@@ -80,7 +96,6 @@ class MyCustomCell: UICollectionViewCell
         let views = ["textLabel" : textLabel, "imageView" : imageView, "space1" : space1, "space2" : space2]
         
         self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[space1(>=0)][imageView]-4-[textLabel][space2(==space1)]|", options: .DirectionLeftToRight, metrics: nil, views: views))
-     
         self.contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1, constant: 0))
         self.contentView.addConstraint(NSLayoutConstraint(item: textLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self.contentView, attribute: .CenterY, multiplier: 1, constant: 0))
     }

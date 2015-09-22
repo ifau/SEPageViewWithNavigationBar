@@ -10,6 +10,9 @@
 
 import UIKit
 
+let SEStoryboardSegueIdentifier = "SEPage"
+let SESegueDoneNotification = "kSESegueDoneNotification"
+
 class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate
 {
     var pageIndicatorTintColor : UIColor = UIColor(white: 1.0, alpha: 0.4)
@@ -70,11 +73,38 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        initialization()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "segueDone:", name: SESegueDoneNotification, object: nil)
+        
+        if viewControllerCanPerformSegue(self, segueIdentifier: SEStoryboardSegueIdentifier)
+        {
+            self.performSegueWithIdentifier(SEStoryboardSegueIdentifier, sender: self)
+        }
+        else
+        {
+            initialize()
+        }
     }
     
-    private func initialization()
+    func segueDone(notification: NSNotification)
     {
+        let segue = notification.object as! SEPageViewSegue
+        viewControllers.append(segue.destinationViewController)
+        
+        if viewControllerCanPerformSegue(segue.destinationViewController, segueIdentifier: SEStoryboardSegueIdentifier)
+        {
+            segue.performNextSegue()
+        }
+        else
+        {
+            initialize()
+        }
+    }
+    
+    private func initialize()
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: SESegueDoneNotification)
+        
         if viewControllers.count > 0
         {
             pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -219,6 +249,15 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
             _titleView.frame = titleframe
         }
     }
+    
+    func viewControllerCanPerformSegue(viewController: UIViewController, segueIdentifier: String) -> Bool
+    {
+        let templates : NSArray? = viewController.valueForKey("storyboardSegueTemplates") as? NSArray
+        let predicate : NSPredicate = NSPredicate(format: "identifier=%@", segueIdentifier)
+        
+        let filteredtemplates = templates?.filteredArrayUsingPredicate(predicate)
+        return filteredtemplates?.count > 0
+    }
 }
 
 private class SENavigationBarView: UIView
@@ -309,5 +348,18 @@ private class SENavigationBarTitleCell: UICollectionViewCell
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("This class does not support NSCoding")
+    }
+}
+
+class SEPageViewSegue : UIStoryboardSegue
+{
+    override func perform()
+    {
+        NSNotificationCenter.defaultCenter().postNotificationName(SESegueDoneNotification, object: self);
+    }
+    
+    func performNextSegue()
+    {
+        destinationViewController.performSegueWithIdentifier(SEStoryboardSegueIdentifier, sender: sourceViewController)
     }
 }
