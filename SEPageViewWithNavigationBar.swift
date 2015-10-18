@@ -15,7 +15,7 @@ let SESegueDoneNotification = "kSESegueDoneNotification"
 
 class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate
 {
-    var pageIndicatorTintColor : UIColor = UIColor(white: 1.0, alpha: 0.4)
+    @IBInspectable var pageIndicatorTintColor : UIColor = UIColor(white: 1.0, alpha: 0.4)
     {
         didSet
         {
@@ -26,7 +26,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
         }
     }
     
-    var currentPageIndicatorTintColor : UIColor = UIColor.whiteColor()
+    @IBInspectable var currentPageIndicatorTintColor : UIColor = UIColor.whiteColor()
     {
         didSet
         {
@@ -48,7 +48,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
         }
     }
     
-    var titleLabelTextColor : UIColor = UIColor.whiteColor()
+    @IBInspectable var titleLabelTextColor : UIColor = UIColor.whiteColor()
     {
         didSet
         {
@@ -103,7 +103,7 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     
     private func initialize()
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, forKeyPath: SESegueDoneNotification)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: SESegueDoneNotification, object: nil)
         
         if viewControllers.count > 0
         {
