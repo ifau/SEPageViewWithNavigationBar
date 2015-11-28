@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Q0M-DB-Pac">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Page View With Navigation Bar-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SEPageViewWithNavigationBar" customModule="SEPageExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="OcL-gZ-8jy"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleLabelTextColor">
+                            <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="currentPageIndicatorTintColor">
+                            <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="pageIndicatorTintColor">
+                            <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="DJw-5M-tuH" kind="custom" identifier="SEPage" customClass="SEPageViewSegue" customModule="SEPageExample" customModuleProvider="target" id="Nxt-M5-fam"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="732" y="290"/>
+        </scene>
+        <!--Second VC-->
+        <scene sceneID="M2x-cQ-sxh">
+            <objects>
+                <viewController title="Second VC" id="hzg-1o-JO3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RG2-4s-A8h"/>
+                        <viewControllerLayoutGuide type="bottom" id="F6N-SL-nBb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aV5-9E-Kw3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="1" green="0.35197368420000003" blue="0.72638260690000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="nWM-vx-KYf" kind="custom" identifier="SEPage" customClass="SEPageViewSegue" customModule="SEPageExample" customModuleProvider="target" id="uxU-4a-ijT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DrC-Wg-Thy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="631" y="951"/>
+        </scene>
+        <!--Third VC-->
+        <scene sceneID="mKN-Pf-Yke">
+            <objects>
+                <viewController title="Third VC" id="nWM-vx-KYf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Ma-tA-klF"/>
+                        <viewControllerLayoutGuide type="bottom" id="sDg-Y3-LUm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XZ0-ss-xak">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="1" green="0.80396268699999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="WwL-vw-tHh" kind="custom" identifier="SEPage" customClass="SEPageViewSegue" customModule="SEPageExample" customModuleProvider="target" id="D2a-2A-pvi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ldp-ZP-atp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1084" y="951"/>
+        </scene>
+        <!--Fourth VC-->
+        <scene sceneID="MJM-F1-DU6">
+            <objects>
+                <viewController title="Fourth VC" id="WwL-vw-tHh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FkI-TD-DJw"/>
+                        <viewControllerLayoutGuide type="bottom" id="ecf-U5-bW9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PwP-pw-fkh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.70588235290000001" green="1" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="vq3-3g-yop" kind="custom" identifier="SEPage" customClass="SEPageViewSegue" customModule="SEPageExample" customModuleProvider="target" id="tRj-C1-ubn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="txB-qq-R7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="951"/>
+        </scene>
+        <!--Five VC-->
+        <scene sceneID="Yic-Bw-zXf">
+            <objects>
+                <viewController title="Five VC" id="vq3-3g-yop" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="85F-TU-ryB"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Zh-uV-cHs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tRg-iR-GLY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bZr-yI-iIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1904" y="951"/>
+        </scene>
+        <!--First VC-->
+        <scene sceneID="Oq1-sw-hkc">
+            <objects>
+                <viewController title="First VC" id="DJw-5M-tuH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rdo-PY-EEJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mr4-7A-Uxy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l4t-jW-bIY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" red="0.58823529409999997" green="0.29411764709999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="hzg-1o-JO3" kind="custom" identifier="SEPage" customClass="SEPageViewSegue" customModule="SEPageExample" customModuleProvider="target" id="dR6-XN-D7d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n5F-ja-o93" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="200" y="951"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UQH-kI-prH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q0M-DB-Pac" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BBz-ZR-gKu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="VyN-zH-ovb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QHI-xJ-slD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="200" y="290"/>
+        </scene>
+    </scenes>
+</document>
