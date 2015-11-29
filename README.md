@@ -56,6 +56,10 @@ SEPageViewWithNavigationBar allows you to change the following properties:
 * `currentPageIndicatorTintColor : UIColor`
 	
 	Tint color of current page indicator, __default__ is __UIColor.whiteColor()__.
+	
+* `bounceEnabled : Bool`
+	
+	Enable bounce effect for UIPageViewController, __default__ is __true__.
 
 #Customization
 
