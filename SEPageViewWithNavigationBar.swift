@@ -59,6 +59,8 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
         }
     }
     
+    @IBInspectable var bounceEnabled : Bool = true
+    
     var viewControllers : [UIViewController] = []
     
     private var currentPage : Int = 0
@@ -184,6 +186,10 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
+        if !(scrollView is UICollectionView) && !bounceEnabled
+        {
+            preventBounceForScrollView(scrollView)
+        }
         if !(scrollView is UICollectionView) && titleView != nil
         {
             let allScrollViewContentSize = CGFloat(viewControllers.count) * self.view.frame.size.width
@@ -191,6 +197,14 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
             let scrollPercent = currentScrollViewContentOffset * 100 / allScrollViewContentSize
 
             titleView.collectionView.contentOffset = CGPoint(x: titleView.collectionView.contentSize.width * scrollPercent / 100, y: 0.0)
+        }
+    }
+    
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+    {
+        if !(scrollView is UICollectionView) && !bounceEnabled
+        {
+            preventBounceForScrollView(scrollView)
         }
     }
     
@@ -237,6 +251,18 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
     {
         customTitleCellClass = cellClass
         customTitleCell = delegateCallback
+    }
+    
+    func preventBounceForScrollView(scrollView: UIScrollView)
+    {
+        if (currentPage == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width)
+        {
+            scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
+        }
+        if (currentPage == viewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width)
+        {
+            scrollView.contentOffset = CGPointMake(scrollView.bounds.size.width, 0)
+        }
     }
     
     override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval)
