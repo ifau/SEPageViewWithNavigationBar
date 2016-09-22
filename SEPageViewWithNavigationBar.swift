@@ -114,10 +114,10 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
             pageViewController.delegate = self
             
             pageViewController.setViewControllers([viewControllers[0]], direction: .Forward, animated: false, completion: nil)
-            
-            // self.addChildViewController(pageViewController)
+            self.edgesForExtendedLayout = .None
+            self.addChildViewController(pageViewController)
             self.view.addSubview(pageViewController.view)
-            // pageViewController.didMoveToParentViewController(self)
+            pageViewController.didMoveToParentViewController(self)
             
             for view in pageViewController.view.subviews
             {
@@ -245,13 +245,52 @@ class SEPageViewWithNavigationBar: UIViewController, UIPageViewControllerDataSou
         return viewControllers.count
     }
     
-    // MARK: - Other
+    // MARK: - Public methods
+    
+    func transitToNextPage()
+    {
+        if currentPage < viewControllers.count - 1
+        {
+            pageViewController.setViewControllers([viewControllers[(currentPage + 1)]], direction: .Forward, animated: true) { [unowned self] (Bool) in
+                
+                self.currentPage += 1
+                self.titleView.pageControl.currentPage = self.currentPage
+            }
+        }
+    }
+    
+    func transitToPreviousPage()
+    {
+        if !(currentPage - 1 < 0) && viewControllers.count > 0
+        {
+            pageViewController.setViewControllers([viewControllers[(currentPage + 1)]], direction: .Reverse, animated: true) { [unowned self] (Bool) in
+                
+                self.currentPage -= 1
+                self.titleView.pageControl.currentPage = self.currentPage
+            }
+        }
+    }
+    
+    func transitToPage(atIndex index: Int)
+    {
+        if index >= 0 && index < viewControllers.count && index != currentPage
+        {
+            let direction: UIPageViewControllerNavigationDirection = index < currentPage ? .Reverse : .Forward
+            pageViewController.setViewControllers([viewControllers[index]], direction: direction, animated: true) { [unowned self] (Bool) in
+                
+                self.currentPage = index
+                self.titleView.pageControl.currentPage = index
+            }
+        }
+    }
     
     func setCustomTitle(cellClass cellClass: AnyClass, delegateCallback: ((titleCell: UICollectionViewCell, currentPage: Int) -> (UICollectionViewCell)))
     {
         customTitleCellClass = cellClass
         customTitleCell = delegateCallback
     }
+    
+    // MARK: - Other
     
     func preventBounceForScrollView(scrollView: UIScrollView)
     {
